@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移动的小白块</title>
+	<style>
+		body{
+			background: black;
+		}
+		canvas{
+			background:white;
+		}
+	</style>
+</head>
+<body>
+	<canvas>
+		你的浏览器不支持canvas
+	</canvas>
+	<script>
+		window.onload = function(){
+			var canv =document.querySelector('canvas');
+			var canvas = canv.getContext('2d');
+			var num = 0;
+			canvas.fillRect(0,0,100,100);
+			setInterval(function(){
+				canvas.clearRect(num,num,100,100);
+				num++
+				canvas.fillRect(num,num,100,100);
+
+			},30);
+		}
+	</script>
+</body>
+</html>

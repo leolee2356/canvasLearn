@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>直线连接曲线的画法</title>
+	<style>
+		body{
+			background:black;
+		}
+		canvas{
+			background:white;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="600"></canvas>
+</body>
+<script>
+	window.onload = function(){
+		//使用直线连接的弧线的画法
+		var canv = document.querySelector('canvas');
+		var canvas =canv.getContext('2d');
+		canvas.beginPath();
+		canvas.moveTo(100,200);
+		canvas.arcTo(100,100,200,100,50);
+		//canvas.closePath();//路径闭合会连接路径点
+		canvas.stroke();
+		//使用贝塞尔曲线的画法
+		canvas.moveTo(250,50);//起始点
+		canvas.quadraticCurveTo(250,200,350,50);//控制点 结束点
+		canvas.stroke();
+		//另一种贝塞尔曲线的画法
+		canvas.moveTo(250,350);//开始点
+		canvas.bezierCurveTo(250,100,200,200,200,100);//控制点1 控制点2 结束点
+		canvas.stroke();
+
+
+	}
+</script>
+</html>

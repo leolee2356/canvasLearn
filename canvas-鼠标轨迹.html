@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标轨迹</title>
+	<style>
+		body{
+			background:black;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="800" height="600" style="background:white;">
+		不支持canvas
+	</canvas>
+	
+</body>
+<script>
+	window.onload =function(){
+		var canv = document.querySelector('canvas');
+		if(false !==canv.getContent){
+			var value = false;//设置是否开启轨迹的标识符
+		var canvas = canv.getContext('2d');
+		canv.addEventListener('mousedown',function(ev){
+			var ev = ev || window.event;
+			value = true;
+			canvas.beginPath();
+			canvas.moveTo(ev.clientX-canv.offsetLeft,ev.clientY-canv.offsetTop);
+		},false);
+		canv.addEventListener('mousemove',function(ev){
+			if (!value) {
+				return ;
+			};
+			var ev = ev || window.event;
+			canvas.lineTo(ev.clientX-canv.offsetLeft,ev.clientY-canv.offsetTop);
+			canvas.stroke();
+		},false);
+		canv.addEventListener('mouseup',function(){
+			value = false;
+		
+		},false);
+		
+			/*canv.onmousedown = function(ev){
+					var ev = ev || window.event;
+					canvas.beginPath();
+					canvas.moveTo(ev.clientX-canv.offsetLeft,ev.clientY-canv.offsetTop);
+					canv.onmousemove = function(ev){
+						var ev = ev || window.event;
+						canvas.lineTo(ev.clientX-canv.offsetLeft,ev.clientY-canv.offsetTop);
+						canvas.stroke();
+					};
+					canv.onmouseup = function(){
+						canv.onmousemove = null;
+						canvas.closePath();
+						//canv.onmousedown = null;
+					};
+				};*/
+
+		}	
+	};
+</script>
+</html>

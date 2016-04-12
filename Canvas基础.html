@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas基础</title>
+<style>
+	body{ background:black;}
+	canvas{ background:white;}/*在样式中设置canvas的宽高,会导致形变.相应会变大几倍*/
+</style>
+</head>
+
+<body>
+	//1.判断是否支持canvas
+	<canvas width="800" height="600">
+		<p>canvas不支持</p>
+	</canvas>
+	<script>
+	window.onload=function(){
+		var canv =document.querySelectorAll('canvas')[0];
+		if (false !== canv.getContent){
+			var canvas = canv.getContext('2d');//进行2d的绘图,3d为webgl
+			//默认色彩为黑色
+			//矩形
+			canvas.fillRect(50,50,100,100);//绘制背景色的矩形
+			canvas.strokeRect(160.5,50.5,100,100);//绘制有边框有线条的矩形
+			canvas.fillStyle = 'blue';//设置绘制图案的的填充色彩
+			canvas.strokeStyle = "red";//设置绘制线条的填充色彩
+			canvas.lineWidth = 10 ;//设置绘图的线宽
+			canvas.fillRect(50,150,100,100);
+			canvas.strokeRect(160.5,150.5,100,100);
+			canvas.lineJoin = "bevel"//设置两条线交汇时候的形状:bevel 斜角round圆形 miter尖角
+			canvas.lineWidth = 1 ;
+			//自由绘制直线,不合并路径的情况
+			canvas.beginPath();
+			canvas.moveTo(300,300);
+			canvas.lineTo(300,400);
+			canvas.lineTo(400,400);
+			canvas.stroke();
+			//开始绘制直线
+			canvas.beginPath();//开始绘制路径
+			canvas.moveTo(300,100);//起始路径点
+			canvas.lineTo(400,200);//连接点
+			canvas.lineTo(500,200);
+			canvas.closePath();//结束路径(合并路径)
+			canvas.stroke();//绘制
+			//使用fill()绘制图像
+			canvas.beginPath();//开始绘制路径
+			canvas.moveTo(300,200);//起始路径点
+			canvas.lineTo(400,300);//连接点
+			canvas.lineTo(500,300);
+			canvas.closePath();//结束路径
+			canvas.fill();//绘制
+			//使用rect绘制矩形路径,只有调用fill()方法路径才会显示出来
+			canvas.beginPath();
+			canvas.rect(500,100,100,100);
+			canvas.closePath();
+			//setTimeout(function(){
+				//canvas.fill();//内填充色彩
+				canvas.stroke();
+			//},600);
+			//canvas.clearRect(0,0,canv.width,canv.height);//清空画布
+				//canvas.clearRect(499,99,110,110);//清空绘制的矩形区域
+			//在指定区域内不受全局影响的构图
+				canvas.save();
+				canvas.fillStyle ="black";
+				canvas.strokeStyle = "green";
+				canvas.lineWidth =3;
+				canvas.beginPath();
+				canvas.moveTo(720,100);
+				canvas.lineTo(720,200);
+				canvas.closePath();
+				canvas.stroke();
+				canvas.restore();
+				//恢复到原模式下作画
+				canvas.beginPath();
+				canvas.moveTo(730,100);
+				canvas.lineTo(730,200);
+				canvas.closePath();
+				canvas.stroke();
+				canvas.lineCap ="square";//线头 butt(没有线帽) square(矩形线帽:线段宽为自己宽度的一半) round:椭圆形线帽
+
+				canvas.beginPath();
+				canvas.moveTo(740,100);
+				canvas.lineTo(740,200);
+				canvas.closePath();
+				canvas.stroke();
+
+				
+			
+				
+			
+			
+
+
+		}
+	}
+	</script>
+</body>
+</html>

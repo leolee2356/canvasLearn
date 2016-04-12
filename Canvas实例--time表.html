@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>time</title>
+</head>
+<style>
+	body{
+		background:black;
+	}
+	canvas{
+		background:white;
+	}
+	h3{
+		color:red;
+	}
+</style>
+<body>
+	<h3>JavaScript实现表</h3>
+	<canvas width="600" height="600">
+		time不支持
+	</canvas>
+</body>
+<script>
+	window.onload = function(){
+		var canv = document.querySelector('canvas');
+		var time = canv.getContext('2d');
+		function Draw(){
+			//1.先画圆
+			var x = 200,y = 200,r = 150;
+			time.beginPath();
+			time.arc(x,y,r,0,Math.PI*2,true);
+			time.closePath();
+			time.stroke();
+			time.beginPath();
+			//机智的画出分针
+			for(var i=0;i<60;i++){
+				time.moveTo(x,y);
+				time.arc(x,y,r,6*i*Math.PI/180,6*(i+1)*Math.PI/180,false);
+			}
+			time.closePath();
+			time.stroke();
+			//画出圆形覆盖一层
+			time.fillStyle = 'white';
+			time.beginPath();
+			time.arc(x,y,130,0,Math.PI*2,true);
+			time.closePath();
+			time.fill();
+			//机智的画出时针
+			time.lineWidth = 3;
+			time.beginPath();
+
+			for(var j=0;j<12;j++){
+				time.moveTo(x,y);
+				time.arc(x,y,r,30*j*Math.PI/180,6*(j+1)*Math.PI/180,false);
+			}
+			time.closePath();
+			time.stroke();
+			//机智的再画出圆形覆盖一层
+			//画出圆形覆盖一层
+			time.fillStyle = 'white';
+			time.beginPath();
+			time.arc(x,y,120,0,Math.PI*2,true);
+			time.closePath();
+			time.fill();
+			//布局总体结束 end
+			//设置动态的效果逻辑
+			var t = new Date();
+			var h = t.getHours(),m = t.getMinutes(),s = t.getSeconds();
+			//-90意味着从零开始的把指针调到0
+			//进行弧度转换
+			var	sv = (s*6-90)*Math.PI/180;
+			var mv = (m*6-90)*Math.PI/180;
+			var hv = (h*30-90+m/2)*Math.PI/180;//当分针走过一分钟,则时针走m/2度,(60分钟30度)
+			//开始动态的时针,分针,秒针的绘画
+			//时针
+			time.lineWidth=5;
+			time.beginPath();
+			time.moveTo(x,y);
+			time.arc(x,y,r*1/2,hv,hv,false);
+			time.closePath();
+			time.stroke();
+			//分
+			time.lineWidth=3;
+			time.beginPath();
+			time.moveTo(x,y);
+			time.arc(x,y,r*1.5/2,mv,mv,false);
+			time.closePath();
+			time.stroke();
+			//秒
+			time.lineWidth=2;
+			time.beginPath();
+			time.moveTo(x,y);
+			time.arc(x,y,r*19/20,sv,sv,false);
+			time.closePath();
+			time.stroke();
+			
+
+
+
+
+			
+		}
+		Draw();
+		setInterval(Draw,1000);
+	}
+</script>
+</html>

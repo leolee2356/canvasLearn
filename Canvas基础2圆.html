@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>circle</title>
+	<style>
+		body{
+			background:black;
+		}
+		canvas{
+			background: white;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="600">
+		你的浏览器不支持canvas
+	</canvas>
+</body>
+<script>
+	window.onload = function() {
+		var canv= document.querySelector('canvas');
+		var canvas = canv.getContext('2d');
+		//canvas.moveTo(200,200);
+		//弧度 = 角度*Math.PI/180
+		//canvas.arc(x,y,半径,开始弧度,结束弧度,false:顺时针,true为逆时针)90*Math.PI/180
+		//两种画圆的方法
+		var circle = new Path2D();
+		circle.arc(200,200,150,0,Math.PI,false);
+		canvas.stroke(circle);
+		canvas.arc(400,400,150,0,Math.PI,false);
+		canvas.stroke();
+		//显示出圆的半径来
+		canvas.moveTo(400,400);//会由开始的点连接到圆开始的点
+		canvas.arc(400,400,55,0,2*Math.PI,false);
+		canvas.stroke();
+
+	};
+</script>
+</html>
