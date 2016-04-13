@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图形填充背景的案例</title>
+</head>
+<style>
+	body{
+		background: black;
+	}
+	canvas{
+		background: white;
+	}
+</style>
+<body>
+	<canvas width="300" height="300">
+		
+	</canvas>
+</body>
+<script>
+	window.onload = function(){
+		var canv = document.querySelector('canvas');
+		var canvas = canv.getContext('2d');
+		var img = new Image();
+		img.onload = function(){
+			draw(this);
+		}
+		img.src='3.png';
+		function draw(obj){
+			/**
+			*@pattern canvas.createPattern (obj,repeat|repeat-x|repeat-y|no-repeat)
+			*obj 可以为图片 \画布 \或视频
+			*/
+			var bg=canvas.createPattern(obj,'repeat');
+			canvas.fillStyle = bg;
+			canvas.fillRect(10,10,130,130)
+
+		}
+	}
+</script>
+</html>

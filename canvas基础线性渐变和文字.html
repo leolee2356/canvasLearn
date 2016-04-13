@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>线性渐变和文字</title>
+	<style>
+		body{ background:black;}
+		canvas{ background:white;}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="300"></canvas>
+	<script>
+		var canv =document.querySelector('canvas');
+		var canvas =canv.getContext('2d');
+		//创建线性渐变对象(起始点的坐标,和结束点的坐标)
+		var obj=canvas.createLinearGradient(30,0,100,100);
+		//色彩分布比例
+		obj.addColorStop(0,'blue');
+		obj.addColorStop(0.1,'green');
+		obj.addColorStop(0.3,'orange');
+		obj.addColorStop(0.5,'red');
+		obj.addColorStop(1,'black');
+		canvas.fillStyle = obj;
+		canvas.fillRect(30,0,100,100);
+		//放射性渐变
+		//创建放射性渐变对象
+		var obj2 = canvas.createRadialGradient(150,10,50,150,20,200,100);
+		obj2.addColorStop(0,'blue');
+		obj2.addColorStop(0.5,'yellow');
+		canvas.fillStyle = obj2;
+		canvas.fillRect(150,0,100,100);
+		//添加字体及字体属性
+		canvas.font = "30px impact";//如同css的字体属性
+		canvas.textBaseline ="top";//top,hanging,middle,alphabetic(默认),ideographic,bottom,添加文本基线,
+		canvas.textAlign='start';//添加文本排列方向:start,end,left,right,center
+		//两种字体填充的分布情况
+		canvas.fillText('创新渠成',0,120);
+		canvas.strokeText('雨润四季',130,120);
+		//3技巧,让文字在canvas中居中显示
+		canvas.fillStyle = "red";
+		canvas.font ="30px sans-serif";
+		//canvas.measureText('').width;获取当前文本的宽度
+		w = canvas.measureText('I XIN U').width;
+		canvas.fillText('I XIN U',(canv.width - w)/2,(canv.height-30)/2);
+		//使用字体阴影
+		canvas.shadowOffsetX = 10;
+		canvas.shadowOffsetY = 10;
+		canvas.shadowBlur = 3;
+		// console.log(canvas.shadowColor);//默认颜色:黑色透明
+		canvas.shadowColor = 'blue';
+		canvas.strokeText('I MISS U',200,200);
+
+		
+	</script>
+</body>
+</html>

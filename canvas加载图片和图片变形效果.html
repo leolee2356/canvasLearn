@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片和文字</title>
+	<style>
+		body{
+			background:black;
+			}
+		canvas{
+			background:white;
+			margin-left:50px;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="192" height="120"></canvas>
+	<script>
+	//显示图片
+		window.addEventListener('load',function(){
+			var canv = document.querySelector('canvas');
+			var canvas =canv.getContext('2d');
+	//生成图片对象
+		var img = new Image();
+		//图像对象生成后加载好路径绘制图片
+		img.onload = function(){
+			draw(this);
+		}
+		//设置图片的路径
+		img.src = '3.1.jpg';
+		function draw(obj){
+			canvas.drawImage(obj,0,0,192,120);
+		}
+		},false) ;
+
+	</script>
+	//使用canvas制作图片旋转效果
+	<br>
+	<input type="button" value="←">
+	<input type="button" value="→">
+	<div>
+		<img src="3.png" alt="" id="img">
+	</div>
+	<script>
+		window.onload = function(){
+			var but = document.querySelectorAll('input');
+			var img = document.querySelector('img');
+			var img1 = new Image();
+			var now = 0;
+			img1.src = img.src;
+			img1.onload = function(){
+				draw(img);//绘制显示的图片
+			};
+			function draw(obj){
+				var canv = document.createElement('canvas');
+				var canvas = canv.getContext('2d');
+				canv.width = obj.width;
+				canv.height = obj.height;
+				obj.parentNode.replaceChild(canv,obj);
+				//把图片绘制到canvas上
+				canvas.drawImage(obj,0,0);
+				//给两个按钮分别设置功能
+				but[1].addEventListener('click',function(){
+					if(now ==3){
+						now = 0;
+					}
+					else{
+						now++;
+					}
+					Change();
+				},false);
+				but[0].addEventListener('click',function(){
+					if(now == 0){
+						now = 3;
+					}
+					else{
+						now--;
+					}
+					Change();
+				},false)
+				//根据上下左右四种情况处理
+			function Change(){
+				console.log(now);
+				switch (now){
+					case 1:
+						//将canv的长宽改成图片目前显示的状态
+						canv.width = obj.height;
+						canv.height = obj.width;
+						//先把绘图环境旋转
+						canvas.rotate(90*Math.PI/180);
+						//再绘制好图形
+						canvas.drawImage(obj,0,-obj.height);//对象的高即为要移动的宽
+						
+					break;
+					case 2:
+						canv.width = obj.width;
+						canv.height = obj.height;
+						canvas.rotate(180*Math.PI/180);
+						canvas.drawImage(obj,-obj.width,-obj.height);
+					break;
+					case 3:
+						canv.width = obj.height;
+						canv.height = obj.width;
+						canvas.rotate(270*Math.PI/180);
+						canvas.drawImage(obj,-obj.width,0);
+					break;
+					case 0:
+						canv.width=obj.width;
+						canv.height=obj.height;
+						canvas.rotate(0);
+						canvas.drawImage(obj,0,0);
+					break;
+
+				}
+			}
+			}
+			
+		};
+	</script>
+</body>
+</html>
